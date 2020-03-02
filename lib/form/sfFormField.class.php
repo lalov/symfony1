@@ -20,7 +20,7 @@ class sfFormField
 {
   protected static
     $toStringException = null;
-  
+
   /** @var sfWidgetForm */
   protected $widget = null;
   /** @var null|sfFormField */
@@ -151,6 +151,8 @@ class sfFormField
     $field = $this->parent->getWidget()->renderField($this->name, $this->value, !is_array($attributes) ? array() : $attributes, $this->error);
 
     $error = $this->error instanceof sfValidatorErrorSchema ? $this->error->getGlobalErrors() : $this->error;
+    if(is_null($error))
+      $error = [];
 
     $help = null === $help ? $this->parent->getWidget()->getHelp($this->name) : $help;
 
@@ -327,7 +329,7 @@ class sfFormField
     if ($this->error instanceof sfValidatorErrorSchema) {
       return $this->error->count() > 0;
     }
-    
+
     return $this->error !== null;
   }
 }

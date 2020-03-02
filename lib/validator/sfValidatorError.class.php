@@ -16,7 +16,7 @@
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @version    SVN: $Id$
  */
-class sfValidatorError extends Exception implements Serializable
+class sfValidatorError extends Exception implements Serializable, Countable
 {
   protected
     $validator = null,
@@ -109,7 +109,7 @@ class sfValidatorError extends Exception implements Serializable
    * error messages:
    *
    * $i18n->__($error->getMessageFormat(), $error->getArguments());
-   * 
+   *
    * If no message format has been set in the validator, the exception standard
    * message is returned.
    *
@@ -152,5 +152,12 @@ class sfValidatorError extends Exception implements Serializable
   public function unserialize($serialized)
   {
     list($this->validator, $this->arguments, $this->code, $this->message) = unserialize($serialized);
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function count() {
+    return 1;
   }
 }
