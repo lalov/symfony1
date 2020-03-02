@@ -44,6 +44,7 @@ class sfDoctrinePluginConfiguration extends sfPluginConfiguration
     }
 
     $manager = Doctrine_Manager::getInstance();
+
     $manager->setAttribute(Doctrine_Core::ATTR_EXPORT, Doctrine_Core::EXPORT_ALL);
     $manager->setAttribute(Doctrine_Core::ATTR_VALIDATE, Doctrine_Core::VALIDATE_NONE);
     $manager->setAttribute(Doctrine_Core::ATTR_RECURSIVE_MERGE_FIXTURES, true);

@@ -10,7 +10,7 @@
  */
 
 /**
- * Base sfDoctrineRecord extends the base Doctrine_Record in Doctrine to provide some
+ * Base sfDoctrineRecord extends the base sfDoctrineRecord in Doctrine to provide some
  * symfony specific functionality to Doctrine_Records
  *
  * @package    symfony
@@ -19,7 +19,7 @@
  * @author     Jonathan H. Wage <jonwage@gmail.com>
  * @version    SVN: $Id$
  */
-abstract class sfDoctrineRecord extends Doctrine_Record
+abstract class sfDoctrineRecord extends DoctrineLaravelModel
 {
   static protected
     $_defaultCulture = 'en';
@@ -27,7 +27,7 @@ abstract class sfDoctrineRecord extends Doctrine_Record
   /**
    * Initializes internationalization.
    *
-   * @see Doctrine_Record
+   * @see sfDoctrineRecord
    */
   public function construct()
   {
@@ -82,7 +82,7 @@ abstract class sfDoctrineRecord extends Doctrine_Record
   /**
    * Returns the current record's primary key.
    *
-   * This a proxy method to {@link Doctrine_Record::identifier()} for
+   * This a proxy method to {@link sfDoctrineRecord::identifier()} for
    * compatibility with a Propel-style API.
    *
    * @return mixed The value of the current model's last identifier column
@@ -146,7 +146,22 @@ abstract class sfDoctrineRecord extends Doctrine_Record
         $name = substr($method, 3);
 
         $table = $this->getTable();
-        if ($table->hasRelation($name))
+        $underScored = $table->getFieldName(sfInflector::underscore($name));
+        if(method_exists($this, $underScored) ){
+          // then we should have an eloquentrelationship
+          if($verb == 'get'){
+//            $value =  $this->getEloquentRelationFromDoctrineDescription($underScored);
+            if ($this->relationLoaded($underScored)) {
+              $value = $this->relations[$underScored];
+              if(!is_null($value))
+//                $this->setRelationBothFrameworks($underScored, $value);
+                return $value;
+            }
+          }
+
+        }
+
+        if ( $table->hasRelation($name))
         {
           $entityName = $name;
         }
@@ -162,7 +177,6 @@ abstract class sfDoctrineRecord extends Doctrine_Record
         }
         else
         {
-          $underScored = $table->getFieldName(sfInflector::underscore($name));
           if ($table->hasField($underScored) || $table->hasRelation($underScored))
           {
             $entityName = $underScored;
@@ -195,7 +209,8 @@ abstract class sfDoctrineRecord extends Doctrine_Record
       try
       {
         return parent::__call($method, $arguments);
-      } catch (Doctrine_Record_UnknownPropertyException $e2) {}
+      } catch (Doctrine_Record_UnknownPropertyException $e2) {
+      } catch (BadMethodCallException $e2) {}
 
       if (isset($e) && $e)
       {
