@@ -70,8 +70,8 @@ class sfSessionStorage extends sfStorage
 
     // set session name
     $sessionName = $this->options['session_name'];
-    
-    if (self::$sessionStarted)
+
+    if (self::$sessionStarted || headers_sent())
     {
       return;//else we get warnings from php 7.2 + cannot manipulate session settings when session is started.
     }
