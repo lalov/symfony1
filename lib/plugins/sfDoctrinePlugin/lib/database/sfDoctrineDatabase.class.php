@@ -90,7 +90,7 @@ class sfDoctrineDatabase extends sfDatabase
       $this->_doctrineConnection->setAttribute($name, $value);
     }
 
-    $encoding = $this->getParameter('encoding', 'UTF8');
+    $encoding = $this->getParameter('encoding', 'utf8mb4');
     $eventListener = new sfDoctrineConnectionListener($this->_doctrineConnection, $encoding);
     $this->_doctrineConnection->addListener($eventListener);
 
