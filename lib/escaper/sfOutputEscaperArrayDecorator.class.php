@@ -132,7 +132,7 @@ class sfOutputEscaperArrayDecorator extends sfOutputEscaperGetterDecorator imple
    *
    * @throws sfException
    */
-  public function offsetSet($offset, $value)
+  public function offsetSet($offset, $value): void
   {
     throw new sfException('Cannot set values.');
   }
@@ -148,7 +148,7 @@ class sfOutputEscaperArrayDecorator extends sfOutputEscaperGetterDecorator imple
    *
    * @throws sfException
    */
-  public function offsetUnset($offset)
+  public function offsetUnset($offset): void
   {
     throw new sfException('Cannot unset values.');
   }
