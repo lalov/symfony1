@@ -354,7 +354,7 @@ class sfDoctrineColumn implements ArrayAccess
     return isset($this->definition[$offset]);
   }
 
-  public function offsetSet($offset, $value): void
+  public function offsetSet($offset, $value)
   {
     $this->definition[$offset] = $value;
   }
@@ -364,7 +364,7 @@ class sfDoctrineColumn implements ArrayAccess
     return $this->definition[$offset];
   }
 
-  public function offsetUnset($offset): void
+  public function offsetUnset($offset)
   {
     unset($this->definition[$offset]);
   }

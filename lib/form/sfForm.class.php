@@ -1066,7 +1066,7 @@ class sfForm implements ArrayAccess, Iterator, Countable
    *
    * @return Boolean true if the widget exists, false otherwise
    */
-  public function offsetExists($name): bool
+  public function offsetExists($name)
   {
     return isset($this->widgetSchema[$name]);
   }
@@ -1078,7 +1078,7 @@ class sfForm implements ArrayAccess, Iterator, Countable
    *
    * @return sfFormField|sfFormFieldSchema A form field instance
    */
-  public function offsetGet($name): mixed
+  public function offsetGet($name)
   {
     if (!isset($this->formFields[$name]))
     {
@@ -1116,7 +1116,7 @@ class sfForm implements ArrayAccess, Iterator, Countable
    *
    * @throws <b>LogicException</b>
    */
-  public function offsetSet($offset, $value): void
+  public function offsetSet($offset, $value)
   {
     throw new LogicException('Cannot update form fields.');
   }
@@ -1128,7 +1128,7 @@ class sfForm implements ArrayAccess, Iterator, Countable
    *
    * @param string $offset The field name
    */
-  public function offsetUnset($offset): void
+  public function offsetUnset($offset)
   {
     unset(
       $this->widgetSchema[$offset],

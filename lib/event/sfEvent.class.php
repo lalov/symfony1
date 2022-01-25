@@ -117,7 +117,7 @@ class sfEvent implements ArrayAccess
    *
    * @return Boolean true if the parameter exists, false otherwise
    */
-  public function offsetExists($name): bool
+  public function offsetExists($name)
   {
     return array_key_exists($name, $this->parameters);
   }
@@ -129,7 +129,7 @@ class sfEvent implements ArrayAccess
    *
    * @return mixed  The parameter value
    */
-  public function offsetGet($name): mixed
+  public function offsetGet($name)
   {
     if (!array_key_exists($name, $this->parameters))
     {

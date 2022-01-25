@@ -238,7 +238,7 @@ class sfValidatorErrorSchema extends sfValidatorError implements ArrayAccess, It
    *
    * @return bool true if the error exists, false otherwise
    */
-  public function offsetExists($name): bool
+  public function offsetExists($name)
   {
     return isset($this->errors[$name]);
   }
@@ -250,7 +250,7 @@ class sfValidatorErrorSchema extends sfValidatorError implements ArrayAccess, It
    *
    * @return sfValidatorError A sfValidatorError instance
    */
-  public function offsetGet($name): mixed
+  public function offsetGet($name)
   {
     return isset($this->errors[$name]) ? $this->errors[$name] : null;
   }
@@ -263,7 +263,7 @@ class sfValidatorErrorSchema extends sfValidatorError implements ArrayAccess, It
    *
    * @throws LogicException
    */
-  public function offsetSet($offset, $value): void
+  public function offsetSet($offset, $value)
   {
     throw new LogicException('Unable update an error.');
   }
@@ -273,7 +273,7 @@ class sfValidatorErrorSchema extends sfValidatorError implements ArrayAccess, It
    *
    * @param string $offset  (ignored)
    */
-  public function offsetUnset($offset): void
+  public function offsetUnset($offset)
   {
   }
 

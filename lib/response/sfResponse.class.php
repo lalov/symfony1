@@ -159,17 +159,6 @@ abstract class sfResponse implements Serializable
     return serialize($this->content);
   }
 
-  public function __serialize(): array
-  {
-    return ['content' => $this->content];
-  }
-
-  public function __unserialize(array $data): void
-  {
-     $this->content = $data['content'];
-  }
-
-
   /**
    * Unserializes a sfResponse instance.
    *
