@@ -553,7 +553,7 @@ class lime_test
     $t = array_reverse($traces);
     foreach ($t as $trace)
     {
-      if (isset($trace['object']) && $this->is_test_object($trace['object']))
+      if (isset($trace['object']) && isset($trace['file']) && $this->is_test_object($trace['object']))
       {
         return array($trace['file'], $trace['line']);
       }
