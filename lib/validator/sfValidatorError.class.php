@@ -16,7 +16,7 @@
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @version    SVN: $Id$
  */
-class sfValidatorError extends Exception implements Serializable, Countable
+class sfValidatorError extends Exception implements Countable
 {
   protected
     $validator = null,
@@ -138,9 +138,9 @@ class sfValidatorError extends Exception implements Serializable, Countable
    *
    * @return string The instance as a serialized string
    */
-  public function serialize()
+  public function __serialize()
   {
-    return serialize(array($this->validator, $this->arguments, $this->code, $this->message));
+    return array($this->validator, $this->arguments, $this->code, $this->message);
   }
 
   /**
@@ -149,15 +149,16 @@ class sfValidatorError extends Exception implements Serializable, Countable
    * @param string $serialized  A serialized sfValidatorError instance
    *
    */
-  public function unserialize($serialized)
+  public function __unserialize($serialized)
   {
-    list($this->validator, $this->arguments, $this->code, $this->message) = unserialize($serialized);
+    list($this->validator, $this->arguments, $this->code, $this->message) = $serialized;
   }
 
   /**
    * @inheritDoc
    */
-  public function count() {
+  public function count(): int
+  {
     return 1;
   }
 }
