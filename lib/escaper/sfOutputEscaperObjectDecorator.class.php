@@ -78,7 +78,7 @@ class sfOutputEscaperObjectDecorator extends sfOutputEscaperGetterDecorator impl
    *
    * @throws sfException if the object does not have a callable get() method
    */
-  public function getRaw($key)
+  public function getRaw($key): mixed
   {
     if (!is_callable(array($this->value, 'get')))
     {
@@ -93,7 +93,7 @@ class sfOutputEscaperObjectDecorator extends sfOutputEscaperGetterDecorator impl
    *
    * @return string
    */
-  public function __toString()
+  public function __toString(): string
   {
     return $this->escape($this->escapingMethod, (string) $this->value);
   }
@@ -103,7 +103,7 @@ class sfOutputEscaperObjectDecorator extends sfOutputEscaperGetterDecorator impl
    *
    * @return boolean
    */
-  public function __isset($key)
+  public function __isset($key): bool
   {
     return isset($this->value->$key);
   }
@@ -115,7 +115,7 @@ class sfOutputEscaperObjectDecorator extends sfOutputEscaperGetterDecorator impl
    *
    * @return int The size of the object
    */
-  public function count()
+  public function count(): int
   {
     return count($this->value);
   }

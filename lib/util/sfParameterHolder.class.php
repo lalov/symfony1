@@ -4,7 +4,7 @@
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
  * (c) 2004-2006 Sean Kerr <sean@code-box.org>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -23,7 +23,7 @@
  */
 class sfParameterHolder implements Serializable
 {
-  protected $parameters = array();
+  protected $parameters = [];
 
   /**
    * The constructor for sfParameterHolder.
@@ -37,25 +37,22 @@ class sfParameterHolder implements Serializable
    */
   public function clear()
   {
-    $this->parameters = array();
+    $this->parameters = [];
   }
 
   /**
    * Retrieves a parameter.
    *
-   * @param  string $name     A parameter name
+   * @param  string  $name  A parameter name
    * @param  mixed  $default  A default parameter value
    *
    * @return mixed A parameter value, if the parameter exists, otherwise null
    */
   public function & get($name, $default = null)
   {
-    if (array_key_exists($name, $this->parameters))
-    {
-      $value = & $this->parameters[$name];
-    }
-    else
-    {
+    if (array_key_exists($name, $this->parameters)) {
+      $value = &$this->parameters[$name];
+    } else {
       $value = $default;
     }
 
@@ -85,7 +82,7 @@ class sfParameterHolder implements Serializable
   /**
    * Indicates whether or not a parameter exists.
    *
-   * @param  string $name  A parameter name
+   * @param  string  $name  A parameter name
    *
    * @return bool true, if the parameter exists, otherwise false
    */
@@ -97,7 +94,7 @@ class sfParameterHolder implements Serializable
   /**
    * Remove a parameter.
    *
-   * @param  string $name     A parameter name
+   * @param  string  $name  A parameter name
    * @param  mixed  $default  A default parameter value
    *
    * @return string A parameter value, if the parameter was removed, otherwise null
@@ -106,8 +103,7 @@ class sfParameterHolder implements Serializable
   {
     $retval = $default;
 
-    if (array_key_exists($name, $this->parameters))
-    {
+    if (array_key_exists($name, $this->parameters)) {
       $retval = $this->parameters[$name];
       unset($this->parameters[$name]);
     }
@@ -120,8 +116,8 @@ class sfParameterHolder implements Serializable
    *
    * If a parameter with the name already exists the value will be overridden.
    *
-   * @param string $name   A parameter name
-   * @param mixed  $value  A parameter value
+   * @param  string  $name  A parameter name
+   * @param  mixed  $value  A parameter value
    */
   public function set($name, $value)
   {
@@ -133,10 +129,10 @@ class sfParameterHolder implements Serializable
    *
    * If a parameter with the name already exists the value will be overridden.
    *
-   * @param string $name   A parameter name
-   * @param mixed  $value  A reference to a parameter value
+   * @param  string  $name  A parameter name
+   * @param  mixed  $value  A reference to a parameter value
    */
-  public function setByRef($name, & $value)
+  public function setByRef($name, &$value)
   {
     $this->parameters[$name] =& $value;
   }
@@ -147,17 +143,15 @@ class sfParameterHolder implements Serializable
    * If an existing parameter name matches any of the keys in the supplied
    * array, the associated value will be overridden.
    *
-   * @param array $parameters  An associative array of parameters and their associated values
+   * @param  array  $parameters  An associative array of parameters and their associated values
    */
   public function add($parameters)
   {
-    if (null === $parameters)
-    {
+    if (null === $parameters) {
       return;
     }
 
-    foreach ($parameters as $key => $value)
-    {
+    foreach ($parameters as $key => $value) {
       $this->parameters[$key] = $value;
     }
   }
@@ -168,12 +162,11 @@ class sfParameterHolder implements Serializable
    * If an existing parameter name matches any of the keys in the supplied
    * array, the associated value will be overridden.
    *
-   * @param array $parameters  An associative array of parameters and references to their associated values
+   * @param  array  $parameters  An associative array of parameters and references to their associated values
    */
-  public function addByRef(& $parameters)
+  public function addByRef(&$parameters)
   {
-    foreach ($parameters as $key => &$value)
-    {
+    foreach ($parameters as $key => &$value) {
       $this->parameters[$key] =& $value;
     }
   }
@@ -188,13 +181,23 @@ class sfParameterHolder implements Serializable
     return serialize($this->parameters);
   }
 
+  public function __serialize()
+  {
+    return $this->parameters;
+  }
+
   /**
    * Unserializes a sfParameterHolder instance.
    *
-   * @param string $serialized  A serialized sfParameterHolder instance
+   * @param  string  $serialized  A serialized sfParameterHolder instance
    */
   public function unserialize($serialized)
   {
     $this->parameters = unserialize($serialized);
+  }
+
+  public function __unserialize($serialized)
+  {
+    $this->parameters = ($serialized);
   }
 }
