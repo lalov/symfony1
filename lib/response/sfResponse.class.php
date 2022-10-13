@@ -17,7 +17,7 @@
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @version    SVN: $Id$
  */
-abstract class sfResponse implements Serializable
+abstract class sfResponse
 {
   /** @var array */
   protected $options = array();
@@ -154,9 +154,9 @@ abstract class sfResponse implements Serializable
    *
    * @return array Objects instance
    */
-  public function serialize()
+  public function __serialize()
   {
-    return serialize($this->content);
+    return ($this->content);
   }
 
   /**
@@ -167,8 +167,8 @@ abstract class sfResponse implements Serializable
    * @param string $serialized  A serialized sfResponse instance
    *
    */
-  public function unserialize($serialized)
+  public function __unserialize($serialized)
   {
-    $this->content = unserialize($serialized);
+    $this->content = $serialized;
   }
 }
