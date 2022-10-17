@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -32,7 +32,7 @@ $rootDir = __DIR__.'/../../functional/fixtures';
 sfToolkit::clearDirectory($rootDir.'/cache');
 
 $dispatcher = new sfEventDispatcher();
-require_once $rootDir.'/config/ProjectConfiguration.class.php';
+require_once $rootDir.'/symfonyconfig/ProjectConfiguration.class.php';
 $configuration = new ProjectConfiguration($rootDir, $dispatcher);
 $autoload = sfSimpleAutoload::getInstance();
 

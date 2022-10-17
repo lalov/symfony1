@@ -215,7 +215,7 @@ abstract class sfBaseTask extends sfCommandApplicationTask
     {
       $this->checkAppExists($application);
 
-      require_once sfConfig::get('sf_config_dir').'/ProjectConfiguration.class.php';
+      require_once str_replace('config','symfonyconfig', sfConfig::get('sf_config_dir')).'/ProjectConfiguration.class.php';
 
       $configuration = ProjectConfiguration::getApplicationConfiguration($application, $env, $this->isDebug(), null, $this->dispatcher);
     }

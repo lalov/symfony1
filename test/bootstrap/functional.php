@@ -19,7 +19,7 @@ if (!isset($root_dir))
   $root_dir = realpath(__DIR__.sprintf('/../%s/fixtures', isset($type) ? $type : 'functional'));
 }
 
-require_once $root_dir.'/config/ProjectConfiguration.class.php';
+require_once $root_dir.'/symfonyconfig/ProjectConfiguration.class.php';
 $configuration = ProjectConfiguration::getApplicationConfiguration($app, 'test', isset($debug) ? $debug : true);
 
 // remove all cache

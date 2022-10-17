@@ -15,7 +15,7 @@ if (!isset($root_dir))
   $root_dir = realpath(dirname(__FILE__).sprintf('/../%s/fixtures', isset($type) ? $type : 'functional'));
 }
 
-include $root_dir.'/config/ProjectConfiguration.class.php';
+include $root_dir.'/symfonyconfig/ProjectConfiguration.class.php';
 $configuration = ProjectConfiguration::getApplicationConfiguration($app, 'test', isset($debug) ? $debug : true);
 sfContext::createInstance($configuration);
 

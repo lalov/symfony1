@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -20,7 +20,7 @@ $task->run(array('test'));
 $task = new sfGenerateAppTask($dispatcher, $formatter);
 $task->run(array('frontend'));
 
-require_once sfConfig::get('sf_root_dir').'/config/ProjectConfiguration.class.php';
+require_once sfConfig::get('sf_root_dir').'/symfonyconfig/ProjectConfiguration.class.php';
 $configuration = ProjectConfiguration::getApplicationConfiguration('frontend', 'test', true);
 
 // Put something in the cache

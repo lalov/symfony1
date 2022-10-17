@@ -18,7 +18,7 @@ if (!isset($app))
   $app = array_pop($dirPieces);
 }
 
-require_once __DIR__.'/../../config/ProjectConfiguration.class.php';
+require_once __DIR__.'/../../symfonyconfig/ProjectConfiguration.class.php';
 $configuration = ProjectConfiguration::getApplicationConfiguration($app, 'test', isset($debug) ? $debug : true);
 sfContext::createInstance($configuration);
 
