@@ -19,24 +19,30 @@
 
 if (!function_exists('__')) {
 
-    function __($text, $args = array(), $catalogue = 'messages') {
-        if (sfConfig::get('sf_i18n')) {
-            return sfContext::getInstance()->getI18N()->__($text, $args, $catalogue);
-        } else {
-            if (empty($args)) {
-                $args = array();
-            }
-
-            // replace object with strings
-            foreach ($args as $key => $value) {
-                if (is_object($value) && method_exists($value, '__toString')) {
-                    $args[$key] = $value->__toString();
-                }
-            }
-
-            return strtr($text, $args);
-        }
+  function __($text, $args = [], $catalogue = 'messages')
+  {
+    if (empty($args)) {
+      $args = [];
     }
+    if (sfConfig::get('sf_i18n')) {
+      $translated = trans($text, $args, $catalogue);
+      if ($translated !== $text) {
+        # Use Laravel translations if defined.
+        return $translated;
+      }
+      return sfContext::getInstance()->getI18N()->__($text, $args, $catalogue);
+    } else {
+
+      // replace object with strings
+      foreach ($args as $key => $value) {
+        if (is_object($value) && method_exists($value, '__toString')) {
+          $args[$key] = $value->__toString();
+        }
+      }
+
+      return strtr($text, $args);
+    }
+  }
 }
 
 /**
