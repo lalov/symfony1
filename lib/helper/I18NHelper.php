@@ -25,7 +25,7 @@ if (!function_exists('__')) {
       $args = [];
     }
     if (sfConfig::get('sf_i18n')) {
-      $translated = trans($text, $args, $catalogue);
+      $translated = trans($text, $args, $catalogue !== 'messages' ? $catalogue : null);
       if ($translated !== $text) {
         # Use Laravel translations if defined.
         return $translated;
