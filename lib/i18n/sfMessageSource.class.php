@@ -163,8 +163,6 @@ abstract class sfMessageSource implements sfIMessageSource
   {
     $variants = $this->getCatalogueList($catalogue);
 
-    $this->messages = array();
-
     foreach ($variants as $variant)
     {
       $source = $this->getSource($variant);
