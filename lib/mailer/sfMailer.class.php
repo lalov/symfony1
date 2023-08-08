@@ -273,15 +273,15 @@ class sfMailer extends Swift_Mailer
     return $this;
   }
 
-  /**
-   * Sends the given message.
-   *
-   * @param Swift_Mime_Message|Swift_Mime_SimpleMessage $message           The message to send.
-   * @param string[]                                    &$failedRecipients An array of failures by-reference
-   *
-   * @return int|false The number of sent emails
-   */
-  public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
+    /**
+     * Sends the given message.
+     *
+     * @param  \Swift_Mime_Message  $message  The message to send.
+     * @param  null  $failedRecipients  An array of failures by-reference
+     *
+     * @return int|false The number of sent emails
+     */
+  public function send(Swift_Mime_Message $message, &$failedRecipients = null): bool|int
   {
     if ($this->force)
     {
