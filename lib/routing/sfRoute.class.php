@@ -21,6 +21,9 @@
  */
 class sfRoute implements Serializable
 {
+  protected int $firstOptional;
+  protected array $segments;
+
   protected
     $isBound = false,
     $context = null,
