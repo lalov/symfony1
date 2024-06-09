@@ -21,6 +21,7 @@ class sfBrowser extends sfBrowserBase
   protected
     $listeners        = array(),
     $context          = null,
+    $rawConfiguration  = array(),
     $currentException = null;
 
   /**
